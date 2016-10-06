@@ -1,0 +1,51 @@
+#include "windows.h"
+#include "commdlg.h"
+#include "resource.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GETSTAT DIALOG DISCARDABLE  0, 0, 311, 245
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Converter from Seed to Athers"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Log of Data File",IDC_STATIC,18,21,274,34
+    GROUPBOX        "Current Filter for Data",IDC_STATIC,18,65,274,34
+    GROUPBOX        "Current Time Selection",IDC_STATIC,18,197,274,41
+    GROUPBOX        "Save Decoded Data to Destination File",IDC_STATIC,18,
+                    153,274,34,WS_GROUP
+    GROUPBOX        "Open Source File",IDC_STATIC,18,109,274,34,WS_GROUP
+    COMBOBOX        IDC_LDATA,25,33,260,132,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Only Event",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,29,79,51,10
+    EDITTEXT        IDC_STAN,96,76,40,14,ES_AUTOHSCROLL
+    LTEXT           "Station Filter",IDC_STATIC,141,79,40,8
+    EDITTEXT        IDC_CHAN,192,76,40,14,ES_AUTOHSCROLL
+    LTEXT           "Channel Filter",IDC_STATIC,237,79,44,8
+    PUSHBUTTON      "Open",IDC_OPEN,39,122,50,14
+    PUSHBUTTON      "Save",IDC_SAVE,39,166,50,14
+    CONTROL         "SAC Asci",IDC_SGR,"Button",BS_AUTORADIOBUTTON,125,168,
+                    50,10
+    CONTROL         "Wgsnplot",IDC_PITZA,"Button",BS_AUTORADIOBUTTON,225,168,
+                    50,10
+    EDITTEXT        IDC_START,22,216,98,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_END,190,216,98,14,ES_AUTOHSCROLL
+    LTEXT           "Start Time",IDC_STATIC,43,207,33,8
+    LTEXT           "End Time",IDC_STATIC,201,207,31,8
+    EDITTEXT        IDC_BSIZE,208,121,40,14,ES_AUTOHSCROLL
+    LTEXT           "BlockSize",IDC_STATIC,255,123,32,8
+    PUSHBUTTON      "Apply",IDC_APPLY,128,216,54,14
+    PUSHBUTTON      "Create Data Baze Of SEED File",IDC_RESCAN,19,5,106,14
+    CONTROL         "Is It Online Buffer ?",IDC_ONLINEF,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,111,124,75,10
+    PUSHBUTTON      "SaveLog",IDC_BUTTON1,132,5,50,14
+    PUSHBUTTON      "LoadLog",IDC_BUTTON2,242,5,50,14
+    PUSHBUTTON      "Help",IDC_MYHELP,187,5,50,14
+END
+
+

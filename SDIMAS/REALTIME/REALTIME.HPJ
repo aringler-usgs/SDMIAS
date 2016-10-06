@@ -1,0 +1,20 @@
+; This file is maintained by HCW. Do not modify this file directly.
+
+[OPTIONS]
+HCW=1
+COMPRESS=12 Hall Zeck
+ERRORLOG=realtime.log
+LCID=0x409 0x0 0x0 ;English (United States)
+REPORT=Yes
+CONTENTS=ABOUT
+TITLE=Data Request From DP's net port 4003
+CNT=realtime.CNT
+COPYRIGHT=Copyright ME, 1994.
+HLP=realtime.hlp
+
+[FILES]
+realtime.rtf
+
+[WINDOWS]
+main="",(0,21,696,785),29188,,(r16776960)
+proc4="",(652,8,363,750),28672,(r15269887),

@@ -1,0 +1,11 @@
+;-------------------------------------
+; SCANSCSI.DEF module definition file
+;-------------------------------------
+
+NAME           READSEED
+
+DESCRIPTION    'Reading MiniSeed Format'
+CODE           PRELOAD MOVEABLE DISCARDABLE
+DATA           PRELOAD MOVEABLE MULTIPLE
+HEAPSIZE       1024
+

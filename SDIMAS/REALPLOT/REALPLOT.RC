@@ -1,0 +1,59 @@
+#include "windows.h"
+#include "commdlg.h"
+#include "resource.h"
+
+
+IDR_FILE MENU DISCARDABLE 
+BEGIN
+    POPUP "&Settings"
+    BEGIN
+        MENUITEM "&PlotParams",                 ID_PLOTINFO
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit",                       ID_EXIT
+    END
+    POPUP "&Run"
+    BEGIN
+        MENUITEM "&Start",                      ID_START
+        MENUITEM "S&top",                       ID_STOP
+		MENUITEM "&Help",                       ID_HELP
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GETSETTINGS DIALOG DISCARDABLE  0, 0, 300, 206
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Settings For RealTime Helem"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "OK",IDC_OK,183,178,50,14
+    GROUPBOX        "Graph Info",IDC_STATIC,7,7,286,40
+    GROUPBOX        "Channel Info",IDC_STATIC,7,64,286,40
+    PUSHBUTTON      "OpenBuffer",IDC_OPEN,15,22,50,14
+    LTEXT           "Minutes Per Line:",IDC_STATIC,72,25,56,8
+    EDITTEXT        IDC_MIN,135,22,40,14,ES_AUTOHSCROLL
+    LTEXT           "Number Of Lines:",IDC_STATIC,182,26,56,8
+    EDITTEXT        IDC_LIN,245,22,40,14,ES_AUTOHSCROLL
+    LTEXT           "Channel Name:",IDC_STATIC,46,81,50,8
+    EDITTEXT        IDC_CHAN,107,78,40,14,ES_AUTOHSCROLL
+    LTEXT           "Scale Factor:",IDC_STATIC,158,81,43,8
+    EDITTEXT        IDC_MAG,212,78,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Font",IDC_FONT,66,178,50,14
+    GROUPBOX        "Filter Info",IDC_STATIC,7,121,286,40
+    CONTROL         "HiPass",IDC_RADIO0,"Button",BS_AUTORADIOBUTTON,10,
+                    137,52,10
+    CONTROL         "W.Anderson_20",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,
+                    62,137,67,10
+    CONTROL         "Spwwss_20",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,129,
+                    137,54,10
+    CONTROL         "Lpwwss_20",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,183,
+                    137,53,10
+    CONTROL         "Lpwwss_01",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,236,
+                    137,53,10
+END
+
+

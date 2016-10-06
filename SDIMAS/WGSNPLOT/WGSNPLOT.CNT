@@ -1,0 +1,65 @@
+:Base wgsnplot.hlp>proc4
+:Title Wgsnplot
+:Index Samples=wgsnplot.hlp
+1 General Information
+2 About the program=ABOUT_PROGRAM>proc4
+2 Contact for errors and modifications=ABOUT_ME>proc4
+1 Algoritms 
+2 Magnitude calculation=MAGNITUDE>proc4
+2 User Filter design=FILTER>proc4
+2 Standard trace emulation=EMULATION>proc4
+2 Determination of azimuth to source=AZIMUTH>proc4
+2 Determination of Origin Time=TORIGIN>proc4
+2 Determination of distance to source=DISTANCE>proc4
+2 Components rotation=ROTATION>proc4
+2 Spectral Density Calculation=SPECTR>proc4
+2 Instrument Response Calculation=RESPONCE>proc4
+1 File Menu 
+2 New EarthQuake=ID_FILE_NEWEARTHQUAKE>proc4
+2 AddTrace=                 ID_FILE_ADDTRACE>proc4
+2 DeleteTrace=              ID_FILE_DELETETRACE>proc4
+2 Print  =                  ID_FILE_PRINT>proc4
+2 Exit   =                  ID_FILE_EXIT>proc4
+1 View Menu
+2 ZoomIn =                  ID_VIEW_SELECTTYPEOFVIEW_ZOOMIN>proc4
+2 ZoomOut =                 ID_VIEW_SELECTTYPEOFVIEW_ZOOMOUT>proc4
+2 Scroll_Left=              ID_SCROL_L>proc4
+2 Scroll_Right=             ID_SCROL_R>proc4
+2 SelectComponents=         ID_VIEW_SELECTCOMPONENTS>proc4
+2 Scale 1:2=               ID_SCALE1_2>proc4
+2 Scale 2:1=               ID_SCALE2_1>proc4
+2 Select_Font=             ID_VIEW_SELECTFONT>proc4
+2 SclaleMaxLocal=     ID_VIEW_SELECTTYPEOFVIEW_SCLALEMAXLOCAL>proc4
+2 ScaleMax&Global=    ID_VIEW_SELECTTYPEOFVIEW_SCALEMAXGLOBAL>proc4
+2 Scale&User=         ID_VIEW_SELECTTYPEOFVIEW_SCALEUSER>proc4
+2 PlotOnOne=     ID_VIEW_MIX>proc4
+1 Sort Menu
+2 Sort ZNE=                ID_VIEW_SORT_ZNE>proc4
+2 Sort ZEN=                ID_VIEW_SORT_ZEN>proc4
+2 Sort ENZ=                ID_VIEW_SORT_ENZ>proc4
+2 Sort Delta=              ID_VIEW_SORT_DIST>proc4
+1 Math Menu
+2 Spectr                =      ID_SPECTR>proc4
+2 PolesAndZerosTest     =      ID_POLZERTEST>proc4
+2 W-A               =          ID_FILTERS_WA>proc4
+2 WWSSN-SP           =         ID_FILTERS_WWSSSP>proc4
+2 WWSSN-LP            =        ID_FILTERS_WWSSLP>proc4
+2 KIRNOS               =       ID_FILTERS_KIRNOS>proc4
+2 LPSRO                 =      ID_FILTERS_LPSRO>proc4
+2 UserDefined           =      ID_FILTERS_USERDEFINED>proc4
+2 2D-Rotation =                ID_2DROTATION>proc4
+2 ParticleMotion =             ID_MOTION>proc4
+2 CorrectOrientation =          ID_ORIENT>proc4
+1 Pick Menu
+2 PickTime=                ID_PICKTIME>proc4
+2 PickAmp=                 ID_PICKAMP>proc4
+2 ListTime=                   ID_LISTTIME>proc4
+2 ListAmp=                    ID_LISTAMP>proc4
+1 Source Menu
+2 Origin Time      =          ID_VADATI>proc4
+2 Predicted Ttimes=            ID_PREDICT>proc4
+2 Map_Position=               ID_SOURCE>proc4
+2 Azimuth To Source   =    ID_AZASOUR     >proc4
+1 How to?
+2 How to determine earthquake using one station?=ID_ONESTATION>proc4
+   

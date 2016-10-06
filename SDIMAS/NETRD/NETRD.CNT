@@ -1,0 +1,10 @@
+:Base netrd.hlp>proc4
+:Title Wgsnplot
+:Index Samples=netrd.hlp
+1 General Information
+2 About the program=ABOUT>proc4
+1 Program options
+2 [Hosts] file=HOSTS>proc4
+2 [Services] file=SERVICES>proc4
+2 Main Window=MAINW>proc4
+   

@@ -1,0 +1,16 @@
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG16 DIALOG DISCARDABLE  0, 0, 136, 28
+STYLE DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,79,7,50,13
+    COMBOBOX        IDC_COMBO1,7,7,61,122,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+

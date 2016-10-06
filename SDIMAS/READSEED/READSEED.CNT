@@ -1,0 +1,10 @@
+:Base readseed.hlp>proc4
+:Title READSEED
+:Index Samples=readseed.hlp
+1 General Information
+2 About the program=ABOUT>proc4
+1 Program options
+2 Station.ini file=STINI>proc4
+2 Response.ini file=RSPINI>proc4
+2 Main Window=MAINW>proc4
+   

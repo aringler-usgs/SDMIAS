@@ -1,0 +1,16 @@
+#define IDC_START                       1000
+#define IDC_STOP                        1001
+#define IDC_EXIT                        1002
+#define IDC_REFRESH                        1003
+#define IDC_OPEN                        1004
+#define IDC_PORT                      1005
+#define IDC_FREQ                      1006
+#define IDC_CH1                      1007
+#define IDC_CH2                      1008
+#define IDC_CH3                      1009
+#define IDC_CH4                      1010
+#define IDC_SEED                       1011
+#define IDC_FILTER                      1012
+#define IDC_SCALE                       1013
+#define IDC_STATUS                       1014
+#define IDC_STATIC                       -1

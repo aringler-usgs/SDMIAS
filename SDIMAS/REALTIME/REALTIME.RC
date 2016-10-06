@@ -1,0 +1,41 @@
+#include "windows.h"
+#include "commdlg.h"
+#include "resource.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GETDPSOCKET DIALOG DISCARDABLE  0, 0, 263, 170
+STYLE WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Real Time Data From DP Socket"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Socket Start Info",IDC_STATIC,12,3,239,39
+    LTEXT           "Host Name",IDC_STATIC,34,13,42,8
+    EDITTEXT        IDC_HOSTNAME,27,23,51,14,ES_AUTOHSCROLL
+    LTEXT           "Socket Name",IDC_STATIC,110,13,44,8
+    EDITTEXT        IDC_SOCKETNAME,106,23,51,14,ES_AUTOHSCROLL
+    LTEXT           "Block Size",IDC_STATIC,193,13,34,8
+    EDITTEXT        IDC_BSIZE,185,23,51,14,ES_AUTOHSCROLL
+    GROUPBOX        "Online Buffer Info Stettings",IDC_STATIC,12,44,164,76
+    LTEXT           "Size Of Buffer in Blocks:",IDC_STATIC,24,77,79,12
+    EDITTEXT        IDC_OSIZE,106,77,58,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "OutPut Name",IDC_OUTNAME,106,99,58,14
+    CONTROL         "All Data",IDC_ALL,"Button",BS_AUTORADIOBUTTON,24,57,52,
+                    10
+    CONTROL         "Event Data",IDC_EVENT,"Button",BS_AUTORADIOBUTTON,106,
+                    57,52,10
+    GROUPBOX        "",IDC_STATIC,181,44,71,76
+    PUSHBUTTON      "Start",IDC_START,192,52,50,14
+    PUSHBUTTON      "Stop",IDC_STOP,192,69,50,14
+    PUSHBUTTON      "Exit",IDC_EXIT,192,86,50,14
+    GROUPBOX        "Status Info",IDC_STATIC,12,135,240,32
+    EDITTEXT        IDC_STATUS,24,146,216,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Name of Online Buffer  : ",IDC_STATIC,24,101,78,8
+    PUSHBUTTON      "Help",IDC_MYHELP,192,103,50,14
+END
+
+

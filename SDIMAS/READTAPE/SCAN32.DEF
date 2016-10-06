@@ -1,0 +1,11 @@
+;-------------------------------------
+; SCANSCSI.DEF module definition file
+;-------------------------------------
+
+NAME           SCAN32
+
+DESCRIPTION    'SCANSCSI Program'
+CODE           PRELOAD MOVEABLE DISCARDABLE
+DATA           PRELOAD MOVEABLE MULTIPLE
+HEAPSIZE       1024
+

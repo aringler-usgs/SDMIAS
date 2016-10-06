@@ -1,0 +1,30 @@
+!include <ntwin32.MAK>
+
+proj = readseed
+
+all: $(proj).exe
+
+# Update the resource if necessary
+$(proj).res: $(proj).rc  resource.h  miniseed.h steim.h steimlib.h
+    rc -r -fo $(proj).res $(cvars) $(proj).rc
+
+
+# Update the object files if necessary
+$(proj).obj: $(proj).c resource.h  miniseed.h steim.h steimlib.h
+   $(cc) $(cflags) $(cvarsmt) $(cdebug) $(proj).c  steimlib.c
+
+
+# Since the link line has some severe differences depending on what
+# platform we are running on, we need to special case this so that
+# we execute the correct commands:
+
+$(proj).exe: $(proj).obj $(proj).res $(proj).def
+    $(link) $(linkdebug) $(guiflags) $(proj).obj steimlib.obj  $(guilibsmt) $(proj).res -out:$(proj).exe
+
+
+# Clean up everything
+clean :
+    -del *.res
+    -del *.res
+    -del *.exe
+    -del *.obj

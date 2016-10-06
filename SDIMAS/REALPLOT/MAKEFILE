@@ -1,0 +1,31 @@
+!include <ntwin32.MAK>
+
+proj = realplot
+mylibs = 
+
+all: $(proj).exe
+
+# Update the resource if necessary
+$(proj).res: $(proj).rc  resource.h
+    rc -r -fo $(proj).res $(cvars) $(proj).rc
+
+
+# Update the object files if necessary
+$(proj).obj: $(proj).c resource.h steimlib.c miniseed.h steim.h s_time.h
+   $(cc) $(cflags) $(cvarsmt) $(cdebug) $(proj).c steimlib.c 
+
+
+# Since the link line has some severe differences depending on what
+# platform we are running on, we need to special case this so that
+# we execute the correct commands:
+
+$(proj).exe: $(proj).obj Steimlib.obj $(proj).res $(proj).def
+    $(link) $(linkdebug) $(guiflags) $(proj).obj Steimlib.obj $(guilibsmt) $(proj).res -out:$(proj).exe
+
+
+# Clean up everything
+clean :
+    -del *.res
+    -del *.res
+    -del *.exe
+    -del *.obj

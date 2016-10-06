@@ -1,0 +1,31 @@
+!include <ntwin32.MAK>
+
+proj = realtime
+mylibs = wsock32.lib
+
+all: $(proj).exe
+
+# Update the resource if necessary
+$(proj).res: $(proj).rc   resource.h
+    rc -r -fo $(proj).res $(cvars) $(proj).rc
+
+
+# Update the object files if necessary
+$(proj).obj: $(proj).c  resource.h
+   $(cc) $(cflags) $(cvarsmt) $(cdebug) $(proj).c  
+
+
+# Since the link line has some severe differences depending on what
+# platform we are running on, we need to special case this so that
+# we execute the correct commands:
+
+$(proj).exe: $(proj).obj $(proj).res $(proj).def
+    $(link) $(linkdebug) $(guiflags) $(proj).obj c:\msdev\lib\wsock32.lib $(guilibsmt) $(proj).res -out:$(proj).exe
+
+
+# Clean up everything
+clean :
+    -del *.res
+    -del *.res
+    -del *.exe
+    -del *.obj

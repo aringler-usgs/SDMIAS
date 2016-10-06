@@ -1,0 +1,16 @@
+NAME         PLOT
+EXETYPE      WINDOWS
+DESCRIPTION  'Plot Real time'
+STUB         'winstub.exe'
+
+CODE         PRELOAD MOVEABLE DISCARDABLE
+DATA         PRELOAD MULTIPLE MOVEABLE
+
+HEAPSIZE     4096
+STACKSIZE    4096
+
+.EXPORTS
+	MainWndProc   @1   ; name of window processing function
+	GetSettings	      @2   ; name of "About" processing function
+
+

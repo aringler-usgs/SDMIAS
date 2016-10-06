@@ -1,0 +1,484 @@
+#include "windows.h"
+#include "commdlg.h"
+#include "commctrl.h"
+#include "resource.h"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU DISCARDABLE 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "New EarthQuake\tn",           ID_FILE_NEWEARTHQUAKE
+        MENUITEM "AddTrace\ta",                 ID_FILE_ADDTRACE
+        MENUITEM "DeleteTrace\td",              ID_FILE_DELETETRACE
+        MENUITEM SEPARATOR
+        MENUITEM "Print\tp",                    ID_FILE_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "Exit\tCtrl+X",                ID_FILE_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "ZoomIn\tz",                   ID_VIEW_SELECTTYPEOFVIEW_ZOOMIN
+
+        MENUITEM "ZoomOut\tu",                  ID_VIEW_SELECTTYPEOFVIEW_ZOOMOUT
+
+        MENUITEM "Scroll_Left\tl",              ID_SCROL_L
+        MENUITEM "Scroll_Right\tr",             ID_SCROL_R
+        MENUITEM "SelectComponents\ts",         ID_VIEW_SELECTCOMPONENTS
+        MENUITEM SEPARATOR
+        POPUP "&SelectTypeofView"
+        BEGIN
+            MENUITEM "ScaleMaxLocal\tShift+L",      ID_VIEW_SELECTTYPEOFVIEW_SCLALEMAXLOCAL
+
+            MENUITEM "ScaleMax&Global\tShift+G",    ID_VIEW_SELECTTYPEOFVIEW_SCALEMAXGLOBAL
+
+            MENUITEM "Scale&User\tShift+U",         ID_VIEW_SELECTTYPEOFVIEW_SCALEUSER
+
+            MENUITEM "&PlotOnOne\tShift+O",         ID_VIEW_MIX
+            POPUP "&Sort By"
+            BEGIN
+                MENUITEM "Sort ZNE\tF1",                ID_VIEW_SORT_ZNE
+                MENUITEM "Sort ZEN\tF2",                ID_VIEW_SORT_ZEN
+                MENUITEM "Sort ENZ\tF3",                ID_VIEW_SORT_ENZ
+                MENUITEM "Sort Delta\tF4",              ID_VIEW_SORT_DIST
+            END
+        END
+        MENUITEM "Scale 1:2\t1",                ID_SCALE1_2
+        MENUITEM "Scale 2:1\t2",                ID_SCALE2_1
+        MENUITEM SEPARATOR
+        MENUITEM "&Select_Font",                ID_VIEW_SELECTFONT
+    END
+    POPUP "&Math"
+    BEGIN
+        POPUP "&Filters"
+        BEGIN
+            MENUITEM "W-A",                         ID_FILTERS_WA
+            MENUITEM "WWSSN-SP",                    ID_FILTERS_WWSSSP
+            MENUITEM "WWSSN-LP",                    ID_FILTERS_WWSSLP
+            MENUITEM "KIRNOS",                      ID_FILTERS_KIRNOS
+            MENUITEM "LPSRO",                       ID_FILTERS_LPSRO
+            MENUITEM SEPARATOR
+            MENUITEM "&UserDefined",                ID_FILTERS_USERDEFINED
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Spectr",                     ID_SPECTR
+        MENUITEM SEPARATOR
+        MENUITEM "&PolesAndZerosTest",          ID_POLZERTEST
+        MENUITEM SEPARATOR
+        POPUP "&3D-Component"
+        BEGIN
+            MENUITEM "2D-Rotation",                 ID_2DROTATION
+            MENUITEM "ParticleMotion",              ID_MOTION
+            MENUITEM "CorrectOrientation",          ID_ORIENT
+        END
+    END
+    POPUP "&Pick"
+    BEGIN
+        MENUITEM "Pick&Time\tt",                ID_PICKTIME
+        MENUITEM "Pick&Amp\tm",                 ID_PICKAMP
+        MENUITEM SEPARATOR
+        MENUITEM "&ListTime",                   ID_LISTTIME
+        MENUITEM "L&istAmp",                    ID_LISTAMP
+    END
+    POPUP "&Source "
+    BEGIN
+        MENUITEM "&Origin Time",                ID_VADATI
+        MENUITEM SEPARATOR
+        MENUITEM "&Predicted Ttimes",           ID_PREDICT
+        MENUITEM SEPARATOR
+        MENUITEM "&Map_Position",               ID_SOURCE
+    END
+    POPUP "&Help "
+    BEGIN
+        MENUITEM "&Context",                    ID_CONTEXT
+    END
+END
+
+IDR_MENU2 MENU DISCARDABLE 
+BEGIN
+    POPUP "&Spectr"
+    BEGIN
+        MENUITEM "&Return\tr",                  ID_SPECTR_RETURN
+        MENUITEM "&Print\tp",                   ID_SPECTR_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit\tCtrl+X",               ID_SPECTR_EXIT
+    END
+    POPUP "S&view"
+    BEGIN
+        POPUP "&Scale"
+        BEGIN
+            MENUITEM "&MaxLocal\tShift+L",          ID_SVIEW_SCALE_MAXLOCAL
+            MENUITEM "&MaxGlobal\tShift+G",         ID_SVIEW_SCALE_MAXGLOBAL
+            MENUITEM "&UserDefined\tShift+U",       ID_SVIEW_SCALE_USERDEFINED
+
+        END
+        MENUITEM "&PlotOnOne\tShift+O",         ID_SVIEW_PLOTONONE
+        MENUITEM SEPARATOR
+        MENUITEM "&Select_Font",                ID_VIEW_SELECTFONT
+    END
+END
+
+IDR_MENU3 MENU DISCARDABLE 
+BEGIN
+    POPUP "&Motion"
+    BEGIN
+        MENUITEM "&Return\tr",                  ID_MOTION_RETURN
+        MENUITEM "&Print\tp",                   ID_MOTION_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit\tCtrl+X",               ID_MOTION_EXIT
+    END
+    POPUP "&Work"
+    BEGIN
+        MENUITEM "&Azimuth To Source\ta",       ID_AZASOUR
+        MENUITEM SEPARATOR
+        MENUITEM "&Select_Font",                ID_VIEW_SELECTFONT
+    END
+END
+
+IDR_MENU4 MENU DISCARDABLE 
+BEGIN
+    POPUP "&Source"
+    BEGIN
+        MENUITEM "&Return\tr",                  ID_SOURCE_RETURN
+        MENUITEM "&Print\tp",                   ID_SOURCE_PRINT
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit\tCtrl+X",               ID_SOURCE_EXIT
+    END
+    POPUP "&Work"
+    BEGIN
+        MENUITEM "&ZoomIn\tz",                  ID_SZIN
+        MENUITEM "&ZoomOut\tu",                 ID_SZOUT
+        MENUITEM "AdjustSoucePosition\ta",      ID_SPOZ
+        MENUITEM "Channel Statistic",           ID_STAT
+        MENUITEM SEPARATOR
+        MENUITEM "&Select_Font",                ID_VIEW_SELECTFONT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOG DISCARDABLE  0, 0, 124, 81
+STYLE WS_POPUP | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,39,59,50,14
+    LTEXT           "Minimum Value:",IDC_STATIC,35,7,50,8
+    LTEXT           "Maximum Value:",IDC_STATIC,34,33,52,8
+    EDITTEXT        IDC_MIN,25,17,75,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MAX,24,43,75,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG2 DIALOG DISCARDABLE  0, 0, 206, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Componnets To View"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,79,74,50,14
+    LISTBOX         IDC_LIST1,7,7,192,60,LBS_NOINTEGRALHEIGHT | 
+                    LBS_EXTENDEDSEL | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DIALOG3 DIALOG DISCARDABLE  0, 0, 206, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Componnents To Delete"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,74,50,14
+    LISTBOX         IDC_LIST1,7,7,192,60,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Delete",ID_DELETE,145,73,50,14
+END
+
+IDD_DIALOG4 DIALOG DISCARDABLE  0, 0, 186, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Butterworth Filter Disign"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,108,74,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,27,74,50,14
+    CONTROL         "Lowpass",IDC_LOWPASS,"Button",BS_AUTORADIOBUTTON,19,18,
+                    44,10
+    CONTROL         "Highpass",IDC_HIPASS,"Button",BS_AUTORADIOBUTTON,19,30,
+                    41,10
+    CONTROL         "Bandpass",IDC_BANDPASS,"Button",BS_AUTORADIOBUTTON,19,
+                    42,47,10
+    CONTROL         "Bandstop",IDC_BANDSTOP,"Button",BS_AUTORADIOBUTTON,19,
+                    54,46,10
+    LTEXT           "Filter Order:",IDC_STATIC,88,22,37,8
+    EDITTEXT        IDC_EDIT1,130,20,40,14,ES_AUTOHSCROLL
+    LTEXT           "F_low(hz)  :",IDC_STATIC,88,37,37,8
+    LTEXT           "F_high(hz) :",IDC_STATIC,88,52,38,8
+    EDITTEXT        IDC_EDIT3,130,50,40,14,ES_AUTOHSCROLL
+    GROUPBOX        "Type of Filter",IDC_STATIC,7,7,67,63
+    GROUPBOX        "Filter Params",IDC_STATIC,81,7,98,63
+    EDITTEXT        IDC_EDIT4,130,35,40,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG5 DIALOG DISCARDABLE  0, 0, 166, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "User Scale For Spectr"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,57,74,50,14
+    LTEXT           "Min value for Y-Axes:",IDC_STATIC,19,13,85,8
+    LTEXT           "Max value for Y-Axes:",IDC_STATIC,19,27,85,8
+    LTEXT           "Min value for X-Axes: ",IDC_STATIC,19,41,85,8
+    LTEXT           "Max value for X-Axes:",IDC_STATIC,19,55,85,8
+    EDITTEXT        IDC_EDIT1,111,9,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT2,111,24,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT3,111,39,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,111,54,40,14,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG6 DIALOG DISCARDABLE  0, 0, 268, 127
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Mark Wave Arrival "
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_WAVETYPE,9,18,75,100,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Wave Type",IDC_STATIC,21,6,52,12
+    GROUPBOX        "Current time",IDC_STATIC,7,70,249,30,BS_CENTER
+    PUSHBUTTON      "Mark",IDC_MARK,7,106,50,14
+    PUSHBUTTON      "Cancel",IDC_SKIP,156,106,50,14
+    COMBOBOX        IDC_WAVEQ,180,18,76,100,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Wave Quality",IDC_STATIC,190,6,56,12
+    EDITTEXT        IDC_COMMENT,7,47,250,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_CTIME,23,82,218,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_WAVESIGN,102,18,60,100,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Wave Sign",IDC_STATIC,109,6,45,12
+    LTEXT           "Comment",IDC_STATIC,118,38,30,8
+END
+
+IDD_DIALOG7 DIALOG DISCARDABLE  0, 0, 213, 127
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Mark Wave Amplitude"
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_WAVETYPE,7,18,199,100,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    CTEXT           "Type Of Magnitude To Calculate",IDC_STATIC,7,7,199,12
+    GROUPBOX        "Current Mark",IDC_STATIC,7,70,199,30,BS_CENTER
+    PUSHBUTTON      "Fill",IDC_MARK,7,106,50,14
+    PUSHBUTTON      "Cancel",IDC_SKIP,156,106,50,14
+    EDITTEXT        IDC_COMMENT,7,47,199,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_CAMPL,17,82,171,12,ES_AUTOHSCROLL
+    LTEXT           "Comment",IDC_STATIC,86,38,30,8
+END
+
+IDD_DIALOG8 DIALOG DISCARDABLE  0, 0, 377, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "List Of Marked Amplitudes"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Save",IDC_SAVELIST,7,74,50,14
+    PUSHBUTTON      "Load",IDC_LOADLIST,111,74,50,14
+    PUSHBUTTON      "Delete",IDC_DELETE,215,74,50,14
+    DEFPUSHBUTTON   "OK",IDOK,319,73,50,14
+    LISTBOX         IDC_LISTAMP,8,7,363,60,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP
+END
+
+IDD_DIALOG9 DIALOG DISCARDABLE  0, 0, 386, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "List Of Marked Arrivals"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Save",IDC_SAVELIST,7,74,50,14
+    PUSHBUTTON      "Load",IDC_LOADLIST,81,74,50,14
+    PUSHBUTTON      "Delete",IDC_DELETE,251,74,50,14
+    DEFPUSHBUTTON   "OK",IDOK,325,74,50,14
+    LISTBOX         IDC_LISTTIME,8,7,371,60,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Rename Wtype",IDC_RENAME,155,73,72,14
+END
+
+IDD_DIALOG10 DIALOG DISCARDABLE  0, 0, 328, 121
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Particle Motion"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,198,102,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,80,102,50,14
+    COMBOBOX        IDC_AX,15,13,248,80,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_AY,15,44,248,80,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "East-West-Component",IDC_STATIC,7,3,304,27
+    GROUPBOX        "North-South-Component",IDC_STATIC,7,34,304,27
+    COMBOBOX        IDC_AZ,15,74,248,80,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Up-Down-Component",IDC_STATIC,7,65,304,27
+    CONTROL         "Reverse",IDC_REV1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    267,14,42,10
+    CONTROL         "Reverse",IDC_REV2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    267,45,42,10
+    CONTROL         "Reverse",IDC_REV3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    267,75,42,10
+END
+
+IDD_DIALOG11 DIALOG DISCARDABLE  0, 0, 275, 93
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Predicted Travel times"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,219,76,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,8,76,50,14
+    EDITTEXT        IDC_EDIT1,7,7,134,12,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT3,7,25,134,12,ES_AUTOHSCROLL | ES_READONLY
+    LISTBOX         IDC_ARA,195,7,73,65,LBS_NOINTEGRALHEIGHT | 
+                    LBS_EXTENDEDSEL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Refresh",IDC_REFRESH,117,76,50,14
+    PUSHBUTTON      "<<",IDC_SLIDER1L,145,7,24,12
+    PUSHBUTTON      ">>",IDC_SLIDER1R,169,7,24,12
+    PUSHBUTTON      "<<",IDC_SLIDER3L,145,25,24,12
+    PUSHBUTTON      ">>",IDC_SLIDER3R,169,25,24,12
+    CONTROL         "All",IDC_ALL,"Button",BS_AUTORADIOBUTTON,7,48,23,10
+    CONTROL         "Local",IDC_LOCAL,"Button",BS_AUTORADIOBUTTON,55,48,33,
+                    10
+    CONTROL         "Tele",IDC_TELE,"Button",BS_AUTORADIOBUTTON,103,48,30,10
+    CONTROL         "Clear",IDC_CLEAR,"Button",BS_AUTORADIOBUTTON,151,48,32,
+                    10
+END
+
+IDD_DIALOG12 DIALOG DISCARDABLE  0, 0, 187, 39
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Vadati Plot"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EVPVS,7,4,112,14,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "<<",IDC_SVPSL,130,4,24,14
+    PUSHBUTTON      ">>",IDC_SVPSR,156,4,24,14
+    PUSHBUTTON      "OK",IDOK,7,21,50,14
+    PUSHBUTTON      "Print",IDC_PRIN,69,21,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,130,21,50,14
+END
+
+IDD_DIALOG13 DIALOG DISCARDABLE  0, 0, 231, 43
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Component's Rotating "
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,175,24,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,7,25,50,14
+    PUSHBUTTON      "Refresh",IDC_REFRESH,91,25,50,14
+    EDITTEXT        IDC_ANGLE,7,8,120,14,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "<<",IDC_S1L,130,8,23,14
+    PUSHBUTTON      ">>",IDC_S1R,202,8,23,14
+    PUSHBUTTON      "<",IDC_SR1L,154,8,23,14
+    PUSHBUTTON      ">",IDC_SR1R,178,8,23,14
+END
+
+IDD_DIALOG14 DIALOG DISCARDABLE  0, 0, 217, 59
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Azimuth ToSource"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Fix",IDOK,163,38,46,14
+    PUSHBUTTON      "Cancel",IDCANCEL,7,38,46,14
+    PUSHBUTTON      "Refresh",IDC_REFRESH,85,38,46,14
+    EDITTEXT        IDC_STRIKE,7,7,110,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_DIP,7,22,110,14,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "<<",IDC_S2L,118,7,22,14
+    PUSHBUTTON      "<",IDC_SR2L,141,7,22,14
+    PUSHBUTTON      ">",IDC_SR2R,164,7,22,14
+    PUSHBUTTON      ">>",IDC_S2R,188,7,22,14
+    PUSHBUTTON      "<<",IDC_S3L,118,22,22,14
+    PUSHBUTTON      "<",IDC_SR3L,141,22,22,14
+    PUSHBUTTON      ">",IDC_SR3R,164,22,22,14
+    PUSHBUTTON      ">>",IDC_S3R,188,22,22,14
+END
+
+IDD_DIALOG15 DIALOG DISCARDABLE  0, 0, 482, 170
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Channel statistics"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,173,149,50,14
+    LISTBOX         IDC_LIST1,16,13,450,128,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    PUSHBUTTON      "SaveToFile",ID_SAVE_STAT,258,148,50,14
+END
+
+IDD_DIALOG16 DIALOG DISCARDABLE  0, 0, 136, 28
+STYLE DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,79,7,50,13
+    COMBOBOX        IDC_COMBARR,7,7,61,122,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MENU1 ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "n",            ID_FILE_NEWEARTHQUAKE,  ASCII   
+    "a",            ID_FILE_ADDTRACE,       ASCII   
+    "d",            ID_FILE_DELETETRACE,    ASCII   
+    "p",            ID_FILE_PRINT,          ASCII   
+    "^X",           ID_FILE_EXIT,           ASCII   
+    "z",            ID_VIEW_SELECTTYPEOFVIEW_ZOOMIN, ASCII 
+    "u",            ID_VIEW_SELECTTYPEOFVIEW_ZOOMOUT, ASCII 
+    "l",            ID_SCROL_L,             ASCII   
+    "r",            ID_SCROL_R,             ASCII   
+    "s",            ID_VIEW_SELECTCOMPONENTS, ASCII 
+    "L",            ID_VIEW_SELECTTYPEOFVIEW_SCLALEMAXLOCAL, ASCII 
+    "G",            ID_VIEW_SELECTTYPEOFVIEW_SCALEMAXGLOBAL, ASCII 
+    "U",            ID_VIEW_SELECTTYPEOFVIEW_SCALEUSER, ASCII 
+    "O",            ID_VIEW_MIX,            ASCII   
+    VK_F1,          ID_VIEW_SORT_ZNE,       VIRTKEY 
+    VK_F2,          ID_VIEW_SORT_ZEN,       VIRTKEY 
+    VK_F3,          ID_VIEW_SORT_ENZ,       VIRTKEY 
+    VK_F4,          ID_VIEW_SORT_DIST,      VIRTKEY 
+    "1",            ID_SCALE1_2,            ASCII   
+    "2",            ID_SCALE2_1,            ASCII   
+    "t",            ID_PICKTIME,            ASCII   
+    "m",            ID_PICKAMP,             ASCII   
+END
+
+IDR_MENU2 ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "r",            ID_SPECTR_RETURN,       ASCII   
+    "p",            ID_SPECTR_PRINT,        ASCII   
+    "^X",           ID_SPECTR_EXIT,         ASCII   
+    "L",            ID_SVIEW_SCALE_MAXLOCAL, ASCII  
+    "G",            ID_SVIEW_SCALE_MAXGLOBAL, ASCII 
+    "U",            ID_SVIEW_SCALE_USERDEFINED, ASCII 
+    "O",            ID_SVIEW_PLOTONONE,     ASCII   
+END
+
+IDR_MENU3 ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "r",            ID_MOTION_RETURN,       ASCII   
+    "p",            ID_MOTION_PRINT,        ASCII   
+    "^X",           ID_MOTION_EXIT,         ASCII   
+    "a",            ID_AZASOUR,             ASCII   
+END
+
+IDR_MENU4 ACCELERATORS MOVEABLE PURE 
+BEGIN
+    "r",            ID_SOURCE_RETURN,       ASCII   
+    "p",            ID_SOURCE_PRINT,        ASCII   
+    "^X",           ID_SOURCE_EXIT,         ASCII   
+    "z",            ID_SZIN,                ASCII   
+    "u",            ID_SZOUT,               ASCII   
+    "a",            ID_SPOZ,                ASCII   
+END
+
+
